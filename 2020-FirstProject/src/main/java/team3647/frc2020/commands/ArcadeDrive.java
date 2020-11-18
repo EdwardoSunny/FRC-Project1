@@ -28,7 +28,8 @@ public class ArcadeDrive extends CommandBase{
 
     @Override 
     public void end(boolean interrupted) {
-    }
+        m_dt.end();
+    }  
 
     @Override 
     public boolean isFinished() {

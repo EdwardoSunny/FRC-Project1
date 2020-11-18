@@ -55,10 +55,9 @@ public class Robot extends TimedRobot {
   }
 
   public void autonomousPeriodic(){
+    CommandScheduler.getInstance().run();
     if (m_RobotContainer.dt.pIO.distanceTraveled >= 120) {
       m_RobotContainer.dt.end();
-    } else{
-      CommandScheduler.getInstance().run();
     }
   }
 }
