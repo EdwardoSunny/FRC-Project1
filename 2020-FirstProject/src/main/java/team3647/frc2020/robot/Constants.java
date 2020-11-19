@@ -22,7 +22,7 @@ public final class Constants {
                         .currentLimiting(true, maxCurrent, stallCurrent).idleMode(IdleMode.kBrake)
                         .voltageCompensation(true, 12.0);
     public static final SparkMaxFactory.Configuration rightMasterConfig =
-                new SparkMaxFactory.Configuration(rightMotor1Pin, true)
+                new SparkMaxFactory.Configuration(rightMotor1Pin, false)
                         .currentLimiting(true, maxCurrent, stallCurrent).idleMode(IdleMode.kBrake)
                         .voltageCompensation(true, 12.0);
 

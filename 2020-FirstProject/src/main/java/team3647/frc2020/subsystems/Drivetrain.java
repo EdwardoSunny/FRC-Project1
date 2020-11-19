@@ -5,7 +5,6 @@ import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import team3647.frc2020.inputs.Joysticks;
 
 public class Drivetrain implements PeriodicSubsystem {
     private CANSparkMax leftMasterMotor;
@@ -13,14 +12,13 @@ public class Drivetrain implements PeriodicSubsystem {
     private CANSparkMax rightMasterMotor;
     private CANSparkMax rightSlaveMotor;
     private CANEncoder leftEncoder;
-    private Joysticks controller;
+    private CANEncoder rightEncoder;
+
     private DifferentialDrive m_drive;
 
-    public periodicIO pIO = new periodicIO();
+    private periodicIO pIO = new periodicIO();
 
-    private double currentRevs;
-
-    public Drivetrain(CANSparkMax lM, CANSparkMax lS, CANSparkMax rM, CANSparkMax rS, Joysticks controller, CANEncoder leftEncoder) {
+    public Drivetrain(CANSparkMax lM, CANSparkMax lS, CANSparkMax rM, CANSparkMax rS,CANEncoder leftEncoder) {
         leftMasterMotor = lM;
         leftSlaveMotor = lS;
         rightMasterMotor = rM;
@@ -32,7 +30,7 @@ public class Drivetrain implements PeriodicSubsystem {
         rightMasterMotor.setInverted(true);
 
         this.leftEncoder = leftEncoder;
-        this.controller = controller;
+        this.rightEncoder = rightEncoder;
         m_drive = new DifferentialDrive(leftMasterMotor, rightMasterMotor);
     }
 
@@ -41,7 +39,6 @@ public class Drivetrain implements PeriodicSubsystem {
     }
 
     public void init() {
-        
     }
 
     public void end() {
@@ -52,10 +49,23 @@ public class Drivetrain implements PeriodicSubsystem {
         rightSlaveMotor.set(0);
     }
 
-    public void arcadeDrive(double xSpeed, double zRotation) {
+    public void arcadeDrive(double xSpeed, double zRotation)  {
         xSpeed *= 0.6;
         zRotation *= 0.3;
         m_drive.arcadeDrive(xSpeed, zRotation);
+    }
+    
+    public void resetEncoders() {
+        leftEncoder.setPosition(0);
+        rightEncoder.setPosition(0);
+    }
+
+    public void resetDistanceTraveled(){
+        pIO.distanceTraveled = 0;
+    }
+
+    public double getDistanceTraveled() {
+        return pIO.distanceTraveled;
     }
 
     public void readPeriodicInputs() {

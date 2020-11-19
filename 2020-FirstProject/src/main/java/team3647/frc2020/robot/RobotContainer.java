@@ -33,7 +33,7 @@ public class RobotContainer {
   private final CANSparkMax rightSlaveMotor = SparkMaxFactory.createSparkMax(Constants.rightSlaveConfig);
   private final CANEncoder leftEncoder = leftMasterMotor.getEncoder();
   private final Joysticks controller = new Joysticks(0);
-  public final Drivetrain dt = new Drivetrain(leftMasterMotor, leftSlaveMotor, rightMasterMotor, rightSlaveMotor, controller, leftEncoder);
+  public final Drivetrain dt = new Drivetrain(leftMasterMotor, leftSlaveMotor, rightMasterMotor, rightSlaveMotor, leftEncoder);
   
 
   private final CommandScheduler m_commandScheduler = CommandScheduler.getInstance();
@@ -43,7 +43,7 @@ public class RobotContainer {
   public RobotContainer(){
     configButtonBindings();
     m_commandScheduler.registerSubsystem(dt);
-    m_commandScheduler.setDefaultCommand(dt, new ArcadeDrive(dt, controller::getLeftStickY, controller::getRightStickX));
+    m_commandScheduler.setDefaultCommand(dt, new ArcadeDrive(dt, controller::getLeftStickX, controller::getRightStickY));
     
   }
 

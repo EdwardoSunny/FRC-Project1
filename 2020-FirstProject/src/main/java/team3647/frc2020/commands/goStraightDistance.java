@@ -2,27 +2,28 @@ package team3647.frc2020.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team3647.frc2020.subsystems.Drivetrain;
-import java.util.function.DoubleSupplier;
 
-public class ArcadeDrive extends CommandBase{
+public class goStraightDistance extends CommandBase {
     private Drivetrain m_dt;
-    private DoubleSupplier turn;
-    private DoubleSupplier throttle;
+    private ArcadeDrive drive;
+    private double distance;
 
-    public ArcadeDrive(Drivetrain m_dt, DoubleSupplier throttle, DoubleSupplier turn) {
+    public goStraightDistance(Drivetrain m_dt, double targetDistance) {
         this.m_dt = m_dt;
-        this.turn = turn;
-        this.throttle = throttle;
+        this.distance = targetDistance;
     }
 
     @Override
     public void initialize() {
+        // TODO Auto-generated method stub
+        m_dt.resetEncoders();
+        m_dt.resetDistanceTraveled();
         super.initialize();
     }
 
     @Override
     public void execute() {
-        m_dt.arcadeDrive(throttle.getAsDouble(), turn.getAsDouble());
+        m_dt.arcadeDrive(0, 1);
     }
 
     @Override 
@@ -32,7 +33,7 @@ public class ArcadeDrive extends CommandBase{
 
     @Override 
     public boolean isFinished() {
-        return false;
+        return m_dt.pIO.distanceTraveled >= distance;
     }
     
 }
