@@ -7,18 +7,18 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Drivetrain implements PeriodicSubsystem {
-    private CANSparkMax leftMasterMotor;
-    private CANSparkMax leftSlaveMotor;
-    private CANSparkMax rightMasterMotor;
-    private CANSparkMax rightSlaveMotor;
-    private CANEncoder leftEncoder;
-    private CANEncoder rightEncoder;
+    private final CANSparkMax leftMasterMotor;
+    private final CANSparkMax leftSlaveMotor;
+    private final CANSparkMax rightMasterMotor;
+    private final CANSparkMax rightSlaveMotor;
+    private final CANEncoder leftEncoder;
+    private final CANEncoder rightEncoder;
 
     private DifferentialDrive m_drive;
 
     private periodicIO pIO = new periodicIO();
 
-    public Drivetrain(CANSparkMax lM, CANSparkMax lS, CANSparkMax rM, CANSparkMax rS,CANEncoder leftEncoder) {
+    public Drivetrain(CANSparkMax lM, CANSparkMax lS, CANSparkMax rM, CANSparkMax rS) {
         leftMasterMotor = lM;
         leftSlaveMotor = lS;
         rightMasterMotor = rM;
@@ -29,9 +29,10 @@ public class Drivetrain implements PeriodicSubsystem {
         leftMasterMotor.setInverted(false);
         rightMasterMotor.setInverted(true);
 
-        this.leftEncoder = leftEncoder;
-        this.rightEncoder = rightEncoder;
+        this.leftEncoder = leftMasterMotor.getEncoder();
+        this.rightEncoder = rightMasterMotor.getEncoder();
         m_drive = new DifferentialDrive(leftMasterMotor, rightMasterMotor);
+        m_drive.setRightSideInverted(false);
     }
 
     public static class periodicIO {
@@ -39,6 +40,8 @@ public class Drivetrain implements PeriodicSubsystem {
     }
 
     public void init() {
+        resetEncoders();
+        resetDistanceTraveled();
     }
 
     public void end() {
@@ -69,8 +72,12 @@ public class Drivetrain implements PeriodicSubsystem {
     }
 
     public void readPeriodicInputs() {
-        double rotations = leftEncoder.getPosition();
-        pIO.distanceTraveled = rotations * 6 * Math.PI;
+        double rotationsL = leftEncoder.getPosition();
+        double rotationsR = leftEncoder.getPosition();
+        double distanceL = rotationsL * 6 * Math.PI;
+        double distanceR = rotationsR * 6 * Math.PI;
+
+        pIO.distanceTraveled = (distanceL + distanceR)/2;
     }
 
     public void writePeriodicOutputs() {

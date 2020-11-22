@@ -46,7 +46,6 @@ public class Robot extends TimedRobot {
   }
 
   public void teleopPeriodic(){
-    CommandScheduler.getInstance().run();
   }
 
   public void autonomousInit(){
@@ -55,7 +54,5 @@ public class Robot extends TimedRobot {
   }
 
   public void autonomousPeriodic(){
-    CommandScheduler.getInstance().run();
-    
   }
 }
