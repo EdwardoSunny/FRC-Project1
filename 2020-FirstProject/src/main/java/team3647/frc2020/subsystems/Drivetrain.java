@@ -26,8 +26,6 @@ public class Drivetrain implements PeriodicSubsystem {
 
         rightSlaveMotor.follow(rightMasterMotor);
         leftSlaveMotor.follow(leftMasterMotor);
-        leftMasterMotor.setInverted(false);
-        rightMasterMotor.setInverted(true);
 
         this.leftEncoder = leftMasterMotor.getEncoder();
         this.rightEncoder = rightMasterMotor.getEncoder();

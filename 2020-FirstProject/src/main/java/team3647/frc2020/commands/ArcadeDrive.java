@@ -18,7 +18,8 @@ public class ArcadeDrive extends CommandBase{
     @Override
     public void initialize() {
         super.initialize();
-        m_dt.init();
+        m_dt.resetDistanceTraveled();
+        m_dt.resetEncoders();
     }
 
     @Override

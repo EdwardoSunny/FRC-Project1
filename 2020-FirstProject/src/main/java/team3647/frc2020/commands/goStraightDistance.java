@@ -17,7 +17,8 @@ public class GoStraightDistance extends CommandBase {
     public void initialize() {
         // TODO Auto-generated method stub
         super.initialize();
-        m_dt.init();
+        m_dt.resetDistanceTraveled();
+        m_dt.resetEncoders();
     }
 
     @Override
