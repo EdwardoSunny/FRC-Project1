@@ -15,6 +15,7 @@ public class Drivetrain implements PeriodicSubsystem {
     private final CANEncoder rightEncoder;
 
     private DifferentialDrive m_drive;
+    private double throttleMulti;
 
     private periodicIO pIO = new periodicIO();
 
@@ -31,6 +32,8 @@ public class Drivetrain implements PeriodicSubsystem {
         this.rightEncoder = rightMasterMotor.getEncoder();
         m_drive = new DifferentialDrive(leftMasterMotor, rightMasterMotor);
         m_drive.setRightSideInverted(false);
+
+        throttleMulti = 0.6;
     }
 
     public static class periodicIO {
@@ -50,11 +53,20 @@ public class Drivetrain implements PeriodicSubsystem {
         rightSlaveMotor.set(0);
     }
 
+    public void slowDown() {
+        throttleMulti = 0.2;
+    }
+
+    public void returnNormal() {
+        throttleMulti = 0.6;
+    }
+
     public void arcadeDrive(double xSpeed, double zRotation)  {
-        xSpeed *= 0.6;
+        xSpeed *= throttleMulti;
         zRotation *= 0.3;
         m_drive.arcadeDrive(xSpeed, zRotation);
     }
+    
     
     public void resetEncoders() {
         leftEncoder.setPosition(0);
