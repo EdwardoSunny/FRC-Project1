@@ -7,14 +7,11 @@ import team3647.frc2020.subsystems.Drivetrain;
 
 public class SlowDriveTrainDown extends CommandBase {
     private final Drivetrain m_dt;
-    private boolean pressed;
+    private static int pressCount = 0;
 
-    public SlowDriveTrainDown(Drivetrain m_dt, boolean pressed) {
+    public SlowDriveTrainDown(Drivetrain m_dt) {
         this.m_dt = m_dt;
-        if (constructCount % 2 == 0) {
-            
-        }
-        pressed = true;
+        pressCount++;
     }
 
     @Override
@@ -24,7 +21,7 @@ public class SlowDriveTrainDown extends CommandBase {
 
     @Override
     public void execute() {
-        if (constructCount % 2 == 0) {    
+        if (pressCount % 2 == 0) {
             m_dt.slow(true);
         } else {
             m_dt.slow(false);
