@@ -5,7 +5,6 @@ import team3647.frc2020.subsystems.Drivetrain;
 
 public class GoStraightDistance extends CommandBase {
     private Drivetrain m_dt;
-    private ArcadeDrive drive;
     private double distance;
 
     public GoStraightDistance(Drivetrain dt, double targetDistance) {

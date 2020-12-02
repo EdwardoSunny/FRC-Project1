@@ -5,9 +5,9 @@ import team3647.frc2020.subsystems.Drivetrain;
 import java.util.function.DoubleSupplier;
 
 public class ArcadeDrive extends CommandBase{
-    private Drivetrain m_dt;
-    private DoubleSupplier turn;
-    private DoubleSupplier throttle;
+    private final Drivetrain m_dt;
+    private final DoubleSupplier turn;
+    private final DoubleSupplier throttle;
 
     public ArcadeDrive(Drivetrain m_dt, DoubleSupplier throttle, DoubleSupplier turn) {
         this.m_dt = m_dt;

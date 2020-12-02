@@ -53,12 +53,12 @@ public class Drivetrain implements PeriodicSubsystem {
         rightSlaveMotor.set(0);
     }
 
-    public void slowDown() {
-        throttleMulti = 0.2;
-    }
-
-    public void returnNormal() {
-        throttleMulti = 0.6;
+    public void slow(boolean slowed) {
+        if (slowed) {
+            throttleMulti = 0.2;
+        } else {
+            throttleMulti = 0.6;
+        }
     }
 
     public void arcadeDrive(double xSpeed, double zRotation)  {

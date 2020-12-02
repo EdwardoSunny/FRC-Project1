@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import team3647.frc2020.subsystems.Drivetrain;
 import team3647.lib.GroupPrinter;
 import team3647.lib.drivers.SparkMaxFactory;
@@ -25,10 +26,11 @@ import team3647.frc2020.commands.GoStraightDistance;
 import team3647.frc2020.inputs.Joysticks;
 
 /**
- * This class is where the bulk of the robot should be declared.  Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
- * (including subsystems, commands, and button mappings) should be declared here.
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a "declarative" paradigm, very little robot logic should
+ * actually be handled in the {@link Robot} periodic methods (other than the
+ * scheduler calls). Instead, the structure of the robot (including subsystems,
+ * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
   private final CANSparkMax leftMaster = SparkMaxFactory.createSparkMax(Constants.leftMasterConfig);
@@ -39,17 +41,16 @@ public class RobotContainer {
 
   public final Drivetrain dt = new Drivetrain(leftMaster, leftSlave, rightMaster, rightSlave);
 
-      
-
   private final CommandScheduler m_commandScheduler = CommandScheduler.getInstance();
 
   public final Command autonomousCommand = new GoStraightDistance(dt, 120);
 
-  public RobotContainer(){
+  public RobotContainer() {
     configButtonBindings();
     m_commandScheduler.registerSubsystem(dt);
-    m_commandScheduler.setDefaultCommand(dt, new ArcadeDrive(dt, controller::getLeftStickY, controller::getRightStickX));
-    
+    m_commandScheduler.setDefaultCommand(dt,
+        new ArcadeDrive(dt, controller::getLeftStickY, controller::getRightStickX));
+
   }
 
   public Command getAutonomousCommand() {
