@@ -16,6 +16,7 @@ public class Drivetrain implements PeriodicSubsystem {
 
     private DifferentialDrive m_drive;
     private double throttleMulti;
+    private boolean isSlowed;
 
     private periodicIO pIO = new periodicIO();
 
@@ -53,12 +54,18 @@ public class Drivetrain implements PeriodicSubsystem {
         rightSlaveMotor.set(0);
     }
 
-    public void slow(boolean slowed) {
+    public void setSlow(boolean slowed) {
         if (slowed) {
+            isSlowed = true;
             throttleMulti = 0.2;
         } else {
+            isSlowed = false;
             throttleMulti = 0.6;
         }
+    }
+
+    public boolean getSlow() {
+        return isSlowed;
     }
 
     public void arcadeDrive(double xSpeed, double zRotation)  {
