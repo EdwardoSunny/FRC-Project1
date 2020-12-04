@@ -7,21 +7,13 @@
 
 package team3647.frc2020.robot;
 
-import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
-
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import team3647.frc2020.subsystems.Drivetrain;
-import team3647.lib.GroupPrinter;
 import team3647.lib.drivers.SparkMaxFactory;
 import team3647.frc2020.commands.ArcadeDrive;
-import team3647.frc2020.commands.GoStraightDistance;
 import team3647.frc2020.commands.GoStraightDistance;
 import team3647.frc2020.inputs.Joysticks;
 
@@ -58,7 +50,7 @@ public class RobotContainer {
   }
 
   private void configButtonBindings(){
-    controller.buttonX.whenActive(new InstantCommand(() -> dt.setSlow(!dt.getSlow())));
+    controller.buttonX.whenActive(new InstantCommand(() -> dt.setSlow(!dt.getSlow()), dt));   
 
   }
 
