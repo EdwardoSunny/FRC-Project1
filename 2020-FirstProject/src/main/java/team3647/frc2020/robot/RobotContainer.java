@@ -15,6 +15,7 @@ import team3647.frc2020.subsystems.Drivetrain;
 import team3647.lib.drivers.SparkMaxFactory;
 import team3647.frc2020.commands.ArcadeDrive;
 import team3647.frc2020.commands.GoStraightDistance;
+import team3647.frc2020.commands.HatchGrabber;
 import team3647.frc2020.inputs.Joysticks;
 
 /**
@@ -50,7 +51,9 @@ public class RobotContainer {
   }
 
   private void configButtonBindings(){
-    controller.buttonX.whenActive(new InstantCommand(() -> dt.setSlow(!dt.getSlow()), dt));   
+    controller.buttonX.whenActive(new InstantCommand(() -> dt.setSlow(!dt.getSlow()), dt));
+    controller.leftBumper.whenActive(new HatchGrabber(dt, true));
+    controller.rightBumper.whenActive(new HatchGrabber(dt, false));
 
   }
 

@@ -46,14 +46,6 @@ public class Drivetrain implements PeriodicSubsystem {
         resetDistanceTraveled();
     }
 
-    public void end() {
-        //stops everything
-        leftMasterMotor.set(0);
-        leftSlaveMotor.set(0);
-        rightMasterMotor.set(0);
-        rightSlaveMotor.set(0);
-    }
-
     public void setSlow(boolean slowed) {
         if (slowed) {
             isSlowed = true;
@@ -86,6 +78,25 @@ public class Drivetrain implements PeriodicSubsystem {
 
     public double getDistanceTraveled() {
         return pIO.distanceTraveled;
+    }
+
+    public double getVelocity() {
+        double leftTicks = leftEncoder.getVelocity();
+        double rightTicks = rightEncoder.getVelocity();
+
+        double avgTickVelocity = (leftTicks + rightTicks)/2;
+
+        double avgftVelocity = avgTickVelocity * (5);
+
+        return avgftVelocity;
+    }
+
+    public void end() {
+        //stops everything
+        leftMasterMotor.set(0);
+        leftSlaveMotor.set(0);
+        rightMasterMotor.set(0);
+        rightSlaveMotor.set(0);
     }
 
     public void readPeriodicInputs() {
