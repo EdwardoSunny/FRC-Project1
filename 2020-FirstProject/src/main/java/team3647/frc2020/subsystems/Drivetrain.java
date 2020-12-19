@@ -1,5 +1,6 @@
 package team3647.frc2020.subsystems;
 
+import com.ctre.phoenix.CANifier;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 
@@ -20,7 +21,7 @@ public class Drivetrain implements PeriodicSubsystem {
 
     private periodicIO pIO = new periodicIO();
 
-    public Drivetrain(CANSparkMax lM, CANSparkMax lS, CANSparkMax rM, CANSparkMax rS) {
+    public Drivetrain(CANSparkMax lM, CANSparkMax lS, CANSparkMax rM, CANSparkMax rS, CANifier canifier) {
         leftMasterMotor = lM;
         leftSlaveMotor = lS;
         rightMasterMotor = rM;
@@ -80,7 +81,7 @@ public class Drivetrain implements PeriodicSubsystem {
         return pIO.distanceTraveled;
     }
 
-    public double getVelocity() {
+    public double getdtVelocity() {
         double leftTicks = leftEncoder.getVelocity();
         double rightTicks = rightEncoder.getVelocity();
 

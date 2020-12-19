@@ -7,6 +7,7 @@
 
 package team3647.frc2020.robot;
 
+import com.ctre.phoenix.CANifier;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -31,8 +32,9 @@ public class RobotContainer {
   private final CANSparkMax rightMaster = SparkMaxFactory.createSparkMax(Constants.rightMasterConfig);
   private final CANSparkMax rightSlave = SparkMaxFactory.createSparkMax(Constants.rightSlaveConfig);
   private final Joysticks controller = new Joysticks(0);
+  private final CANifier canifier = new CANifier(Constants.canifierID);
 
-  public final Drivetrain dt = new Drivetrain(leftMaster, leftSlave, rightMaster, rightSlave);
+  public final Drivetrain dt = new Drivetrain(leftMaster, leftSlave, rightMaster, rightSlave, canifier);
 
   private final CommandScheduler m_commandScheduler = CommandScheduler.getInstance();
 
@@ -52,8 +54,8 @@ public class RobotContainer {
 
   private void configButtonBindings(){
     controller.buttonX.whenActive(new InstantCommand(() -> dt.setSlow(!dt.getSlow()), dt));
-    controller.leftBumper.whenActive(new HatchGrabber(dt, true));
-    controller.rightBumper.whenActive(new HatchGrabber(dt, false));
+    controller.leftBumper.whenActive(new HatchGrabber(dt::getdtVelocity, true));
+    controller.rightBumper.whenActive(new HatchGrabber(dt::getdtVelocity, false));
 
   }
 

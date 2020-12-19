@@ -17,6 +17,8 @@ public final class Constants {
     public static final int stallCurrent = 35;
     public static final int maxCurrent = 60;
 
+    public static final int canifierID = 0;
+
     public static final SparkMaxFactory.Configuration leftMasterConfig =
                 new SparkMaxFactory.Configuration(leftMotor1Pin, false)
                         .currentLimiting(true, maxCurrent, stallCurrent).idleMode(IdleMode.kBrake)
