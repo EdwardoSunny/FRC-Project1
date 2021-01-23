@@ -5,7 +5,6 @@ import java.util.function.DoubleSupplier;
  
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import team3647.frc2020.subsystems.Drivetrain;
  
 public class HatchGrabber extends CommandBase {
     private final Solenoid hatchGrabber = new Solenoid(1);

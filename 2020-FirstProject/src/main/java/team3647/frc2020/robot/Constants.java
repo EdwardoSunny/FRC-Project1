@@ -7,11 +7,9 @@ package team3647.frc2020.robot;
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-import team3647.lib.drivers.SparkMaxFactory;
 import team3647.lib.drivers.TalonSRXFactory;
 import team3647.lib.drivers.VictorSPXFactory;
 
-import com.revrobotics.CANSparkMax.IdleMode;
 
 public final class Constants {
 

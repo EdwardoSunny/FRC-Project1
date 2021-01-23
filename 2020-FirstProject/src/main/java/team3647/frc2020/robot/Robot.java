@@ -7,16 +7,10 @@
 
 package team3647.frc2020.robot;
 
-
-import com.ctre.phoenix.motorcontrol.*;
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import team3647.lib.drivers.SparkMaxFactory;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
