@@ -17,7 +17,7 @@ public class RobotContainer {
   private final Joysticks controller = new Joysticks(0);
   private final CANifier canifier = new CANifier(Constants.canifierID);
  
-  public final Drivetrain dt = new Drivetrain(Constants.leftMasterConfig, Constants.rightMasterConfig, Constants.leftSlaveConfig, Constants.rightSlaveConfig, canifier);
+  public final Drivetrain dt = new Drivetrain(Constants.leftMasterConfig, Constants.rightMasterConfig, Constants.leftSlave1Config, Constants.leftSlave2Config, Constants.rightSlave1Config, Constants.rightSlave1Config, canifier);
   public final Elevator elevator = new Elevator(Constants.ElevatorMasterConfig, Constants.ElevatorSPX1Config, Constants.ElevatorSPX2Config, dt::setSlow, true);
   private final CommandScheduler m_commandScheduler = CommandScheduler.getInstance();
  

@@ -29,7 +29,6 @@ public class Drivetrain implements PeriodicSubsystem {
 
     private double throttleMulti;
     private boolean isSlowed;
-    private GroupPrinter m_printer;
 
 
     public periodicIO p_IO = new periodicIO();
@@ -47,18 +46,18 @@ public class Drivetrain implements PeriodicSubsystem {
 
 
 
-    public Drivetrain(TalonSRXFactory.Configuration leftMasterConfig, TalonSRXFactory.Configuration rightMasterConfig, VictorSPXFactory.Configuration leftSlaveConfig,
-            VictorSPXFactory.Configuration rightSlaveConfig, CANifier canifier) {
+    public Drivetrain(TalonSRXFactory.Configuration leftMasterConfig, TalonSRXFactory.Configuration rightMasterConfig, VictorSPXFactory.Configuration leftSlave1Config, 
+    VictorSPXFactory.Configuration leftSlave2Config, VictorSPXFactory.Configuration rightSlave1Config, VictorSPXFactory.Configuration rightSlave2Config, 
+    CANifier canifier) {
         
         leftMaster = TalonSRXFactory.createTalon(leftMasterConfig);
         rightMaster = TalonSRXFactory.createTalon(rightMasterConfig);
 
-        leftSlave1 = VictorSPXFactory.createVictor(leftSlaveConfig);
-        leftSlave2 = VictorSPXFactory.createVictor(leftSlaveConfig);
+        leftSlave1 = VictorSPXFactory.createVictor(leftSlave1Config);
+        leftSlave2 = VictorSPXFactory.createVictor(leftSlave2Config);
         
-        rightSlave1 = VictorSPXFactory.createVictor(rightSlaveConfig);
-        rightSlave2 = VictorSPXFactory.createVictor(rightSlaveConfig);
-        m_printer = GroupPrinter.getInstance();
+        rightSlave1 = VictorSPXFactory.createVictor(rightSlave1Config);
+        rightSlave2 = VictorSPXFactory.createVictor(rightSlave2Config);
 
         leftSlave1.follow(leftMaster);
         leftSlave2.follow(leftMaster);

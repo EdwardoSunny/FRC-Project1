@@ -15,15 +15,13 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 public final class Constants {
 
+    public static final int leftMasterPin = 9;
+	public static final int leftSlave1Pin = 12; // 10
+	public static final int leftSlave2Pin = 13; // 11
 
- 
- 
- 
- 
-        public static final int leftMasterPin = 1;
-        public static final int leftSlavePin = 2;
-        public static final int rightMasterPin = 3;
-        public static final int rightSlavePin = 4;
+	public static final int rightMasterPin = 4;
+	public static final int rightSlave1Pin = 5;
+	public static final int rightSlave2Pin = 6;
      
         public static final int ElevatorGearboxSRXPin = 8;
         public static final int ElevatorGearboxSPX1Pin = 10;
@@ -54,11 +52,17 @@ public final class Constants {
                     .currentLimiting(true, maxCurrent, stallCurrent, driveContinuousCurrent)
                     .voltageCompensation(true, 12.0);
      
-        public static final VictorSPXFactory.Configuration leftSlaveConfig =
-            new VictorSPXFactory.Configuration(leftSlavePin).configMaxOutput(maxCurrent).configMaxReverseOutput(stallCurrent);
+        public static final VictorSPXFactory.Configuration leftSlave1Config =
+            new VictorSPXFactory.Configuration(leftSlave1Pin).configMaxOutput(maxCurrent).configMaxReverseOutput(stallCurrent);
+        
+        public static final VictorSPXFactory.Configuration leftSlave2Config =
+            new VictorSPXFactory.Configuration(leftSlave2Pin).configMaxOutput(maxCurrent).configMaxReverseOutput(stallCurrent);
      
-        public static final VictorSPXFactory.Configuration rightSlaveConfig =
-        new VictorSPXFactory.Configuration(rightSlavePin).configMaxOutput(maxCurrent).setInverted(true).configMaxReverseOutput(stallCurrent);
+        public static final VictorSPXFactory.Configuration rightSlave1Config =
+            new VictorSPXFactory.Configuration(rightSlave1Pin).configMaxOutput(maxCurrent).setInverted(true).configMaxReverseOutput(stallCurrent);
+        
+        public static final VictorSPXFactory.Configuration rightSlave2Config =
+            new VictorSPXFactory.Configuration(rightSlave2Pin).configMaxOutput(maxCurrent).setInverted(true).configMaxReverseOutput(stallCurrent);
     
     //Elevator configs
     public static final TalonSRXFactory.Configuration ElevatorMasterConfig =

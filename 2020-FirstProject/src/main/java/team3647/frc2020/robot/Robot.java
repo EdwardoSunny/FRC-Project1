@@ -40,12 +40,15 @@ public class Robot extends TimedRobot {
   public void robotPeriodic(){
     CommandScheduler.getInstance().run();
     //every around 20ms after press enable --> for every periodic
+    System.out.println("Drivetrain slowed: " + m_RobotContainer::getDrivetrainSlowed);
+    System.out.println("Robot has Cargo: " + m_RobotContainer::getCargoCondition);
   }
 
   public void teleopInit(){
   }
 
   public void teleopPeriodic(){
+
   }
 
   public void autonomousInit(){
