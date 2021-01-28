@@ -20,11 +20,6 @@ public class Drivetrain implements PeriodicSubsystem {
 
     private CANifier canifier;
 
-    private double leftMasterEncoderValue;
-    private double rightMasterEncoderValue;
-    private double leftVelocity;
-    private double rightVelocity;
-
     private double throttleMulti;
     private boolean isSlowed;
 
@@ -70,6 +65,10 @@ public class Drivetrain implements PeriodicSubsystem {
     public static class periodicIO {
         public double distanceTraveled;
         public boolean hasNoCargo;
+        public double leftMasterEncoderValue;
+        public double rightMasterEncoderValue;
+        public double leftVelocity;
+        public double rightVelocity;
     }
 
     public void arcadeDrive(double xSpeed, double zRotation)  {
@@ -132,26 +131,26 @@ public class Drivetrain implements PeriodicSubsystem {
 
     public void updateEncoders() {
         //convert to revolution
-        leftMasterEncoderValue = (leftMaster.getSelectedSensorPosition()/4096);
-        rightMasterEncoderValue = (rightMaster.getSelectedSensorPosition()/4096);
+        p_IO.distanceTraveled = (leftMaster.getSelectedSensorPosition()/4096);
+        p_IO.rightMasterEncoderValue = (rightMaster.getSelectedSensorPosition()/4096);
 
         //convert from ticks/100ms to rev/sex to ft/s
-        leftVelocity = leftMaster.getSelectedSensorVelocity() * (10/4096) * 0.5;
-        rightVelocity = rightMaster.getSelectedSensorVelocity() * (10/4096) * 0.5;
+        p_IO.leftVelocity = leftMaster.getSelectedSensorVelocity() * (10/4096) * 0.5;
+        p_IO.rightVelocity = rightMaster.getSelectedSensorVelocity() * (10/4096) * 0.5;
     }
 
     public void resetEncoders() {
-        leftMasterEncoderValue = 0;
-        rightMasterEncoderValue = 0;
-        leftMaster.setSelectedSensorPosition(0);
-        rightMaster.setSelectedSensorPosition(0);
-        leftVelocity = 0;
-        rightVelocity = 0;
+      p_IO.leftMasterEncoderValue = 0;
+      p_IO.rightMasterEncoderValue = 0;
+      leftMaster.setSelectedSensorPosition(0);
+      rightMaster.setSelectedSensorPosition(0);
+      p_IO.leftVelocity = 0;
+      p_IO.rightVelocity = 0;
     }
 
     public void updateDistanceTraveled() {
-        double distanceL = leftMasterEncoderValue * 6 * Math.PI;
-        double distanceR = rightMasterEncoderValue * 6 * Math.PI;
+        double distanceL = p_IO.leftMasterEncoderValue * 6 * Math.PI;
+        double distanceR = p_IO.rightMasterEncoderValue * 6 * Math.PI;
         p_IO.distanceTraveled = (distanceL + distanceR)/2;
     }
 
@@ -182,7 +181,7 @@ public class Drivetrain implements PeriodicSubsystem {
     }
 
     public double getdtVelocity() {
-        return (leftVelocity + rightVelocity)/2;
+        return (p_IO.leftVelocity + p_IO.rightVelocity)/2;
     }
 
     public boolean cargoDetection() {
