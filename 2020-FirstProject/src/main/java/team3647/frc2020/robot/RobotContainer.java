@@ -17,20 +17,17 @@ public class RobotContainer {
   private final Joysticks controller = new Joysticks(0);
   private final CANifier canifier = new CANifier(Constants.canifierID);
  
-  public final Drivetrain dt = new Drivetrain(Constants.leftMasterConfig, Constants.rightMasterConfig, Constants.leftSlave1Config, Constants.leftSlave2Config, Constants.rightSlave1Config, Constants.rightSlave1Config, canifier);
+  public final Drivetrain dt = new Drivetrain(Constants.leftMasterConfig, Constants.rightMasterConfig, Constants.leftSlave1Config, Constants.leftSlave2Config, Constants.rightSlave1Config, Constants.rightSlave1Config, canifier, Constants.leftMasterPIDConfig, Constants.rightMasterPIDConfig);
   public final Elevator elevator = new Elevator(Constants.ElevatorMasterConfig, Constants.ElevatorSPX1Config, Constants.ElevatorSPX2Config, dt::setSlow, true);
   private final CommandScheduler m_commandScheduler = CommandScheduler.getInstance();
  
-  public final Command autonomousCommand = new GoStraightDistance(dt, 120);
+  public final Command autonomousCommand = new GoStraightDistance(dt, 10);
  
   public RobotContainer() {
     configButtonBindings();
     m_commandScheduler.registerSubsystem(dt);
     m_commandScheduler.setDefaultCommand(dt,
         new ArcadeDrive(dt, controller::getLeftStickY, controller::getRightStickX));
-    
- 
- 
   }
  
   public Command getAutonomousCommand() {

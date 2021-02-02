@@ -1,15 +1,16 @@
 package team3647.frc2020.commands;
 
+import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team3647.frc2020.subsystems.Drivetrain;
 
 public class GoStraightDistance extends CommandBase {
     private Drivetrain m_dt;
     private double distance;
-
+    //takes in feet, converts to meters b/c drivetrain is in meters
     public GoStraightDistance(Drivetrain dt, double targetDistance) {
         this.m_dt = dt;
-        this.distance = targetDistance;
+        this.distance = Units.feetToMeters(targetDistance);
     }
 
     @Override
