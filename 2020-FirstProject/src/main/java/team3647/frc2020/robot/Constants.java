@@ -32,7 +32,7 @@ public final class Constants {
     public static final int hoodPWMPortChannel = 2;
     public static final int canifierID = 0;
 
-    public static final int driveWheelDiameter = 4;
+    public static final double driveWheelDiameter = 0.1016;
 
 
     public static final double kMaxSpeedMeterPerSecond = 2; 
@@ -40,8 +40,8 @@ public final class Constants {
 
     public static final double maxVoltage = 11.0;
 
-    public static final double EncoderTicksToFeet =  (1/4096) * driveWheelDiameter * Math.PI;
-    public static final double EncoderTicksToFeetPerSec = (10/4096) * 0.5;
+    public static final double EncoderTicksToMeters =  (1/4096) * driveWheelDiameter * Math.PI;
+    public static final double EncoderTicksToMetersPerSec = (10/4096) * 0.5;
     
     public static final int stallCurrent = 35;
     public static final int maxCurrent = 60;
@@ -78,10 +78,10 @@ public final class Constants {
         new VictorSPXFactory.Configuration(rightSlave2Pin).configMaxOutput(maxCurrent).setInverted(true).configMaxReverseOutput(stallCurrent);
 
     public static final ClosedLoopConfig leftMasterPIDConfig = new ClosedLoopConfig()
-        .encoderVelocityToRPM(EncoderTicksToFeetPerSec).encoderTicksToUnits(EncoderTicksToFeet)
-        .maxVelocity(kMaxSpeedMeterPerSecond).configPID(kP, kI, kD);
+        .encoderVelocityToRPM(EncoderTicksToMetersPerSec).encoderTicksToUnits(EncoderTicksToMeters)
+            .maxVelocity(kMaxSpeedMeterPerSecond).configPID(kP, kI, kD);
     public static final ClosedLoopConfig rightMasterPIDConfig = new ClosedLoopConfig()
-        .encoderVelocityToRPM(EncoderTicksToFeetPerSec).encoderTicksToUnits(EncoderTicksToFeet)
+            .encoderVelocityToRPM(EncoderTicksToMetersPerSec).encoderTicksToUnits(EncoderTicksToMeters)
         .maxVelocity(kMaxSpeedMeterPerSecond).configPID(kP, kI, kD);
     
     
@@ -97,4 +97,11 @@ public final class Constants {
     public static final VictorSPXFactory.Configuration ElevatorSPX2Config = 
         new VictorSPXFactory.Configuration(ElevatorGearboxSPX2Pin).configMaxOutput(maxCurrent).setInverted(false)
                 .configMaxReverseOutput(stallCurrent);
+
+
+    public static final int hatchGrabberPDPpin = 7;
+    public static final int hatchGrabberSolinoidPin = 2;
+    public static final int shoppingCartSPXPin = 1;
+    public static final VictorSPXFactory.Configuration hatchSuckerConfig =
+               new VictorSPXFactory.Configuration(shoppingCartSPXPin);
 }
